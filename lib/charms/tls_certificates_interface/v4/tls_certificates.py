@@ -1067,6 +1067,7 @@ class TLSCertificatesRequiresV4(Object):
     def _on_secret_remove(self, event: SecretRemoveEvent) -> None:
         """Handle Secret Removed Event."""
         try:
+            logger.debug("Attempting to remove revision %s", event.revision)
             event.secret.remove_revision(event.revision)
         except SecretNotFoundError:
             logger.warning(
